@@ -5,21 +5,34 @@
  */
 package dominio;
 
+import java.util.ArrayList;
 
 /**
  *
  * @author emilio
  */
 public class Sala {
+
+    public static int MAX_ASIENTOS_POR_FILA = 30;
     private String numero;
-    public static enum Tipo {TRADICIONAL, MACRO_XE, IMAX, CUATRO_DX, VIP}
+
+    public static enum Tipo {
+        TRADICIONAL, MACRO_XE, IMAX, CUATRO_DX, VIP
+    }
     private Tipo tipo;
-    
-    
+    private ArrayList<Fila> asientos;
 
     public Sala(String numero, Tipo tipo) {
         this.numero = numero;
         this.tipo = tipo;
+        asientos = new ArrayList<>();
+    }
+
+    public Sala(String numero, Tipo tipo, int numDeFilas, int asientosPorFila) {
+        this(numero, tipo);
+        for (int i = 1; i <= numDeFilas; i++) {
+            asientos.add(new Fila(i, asientosPorFila));
+        }
     }
 
     public String getNumero() {
@@ -37,5 +50,5 @@ public class Sala {
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
-    
+
 }

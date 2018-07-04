@@ -17,84 +17,27 @@ import static org.junit.Assert.*;
  * @author emilio
  */
 public class AsientoTest {
-    Asiento asientoTest;
-    
-    
+
+    Asiento asientoTested;
+
     public AsientoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        asientoTest = new Asiento("A", "1");
+        asientoTested = new Asiento('A', 1);
     }
-    
+
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of toString method, of class Asiento.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Asiento instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of equals method, of class Asiento.
-     */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object o = null;
-        Asiento instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of hashCode method, of class Asiento.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Asiento instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getFila method, of class Asiento.
-     */
-    @Test
-    public void testGetFila() {
-        System.out.println("getFila");
-        Asiento instance = null;
-        String expResult = "";
-        String result = instance.getFila();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -103,23 +46,29 @@ public class AsientoTest {
     @Test
     public void testSetFila() {
         System.out.println("setFila");
-        String expected = "A";
-        asientoTest.setFila(expected);
-        String result = asientoTest.getFila();
-        assertEquals(expected, result);
-        asientoTest.setFila("NO");
-        
-    }
-
-    /**
-     * Test of getNumero method, of class Asiento.
-     */
-    @Test
-    public void testGetNumero() {
-        System.out.println("getNumero");
-        String expected = "1";
-        String result = asientoTest.getNumero();
-        assertEquals(expected, result);
+        try {
+            asientoTested.setFila('A');
+        } catch (IllegalArgumentException e) {
+            fail("Caracter 'A' deberia ser valido");
+        }
+        try {
+            asientoTested.setFila('a');
+        } catch (IllegalArgumentException e) {
+            fail("Caracter 'a' deberia ser valido");
+        }
+        try {
+            asientoTested.setFila(Character.MIN_VALUE);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue("Character.MIN_VALUE no deberia ser valido", true);
+        }
+        try {
+            asientoTested.setFila('ñ');
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue("Caracter ñ no deberia ser valido", true);
+        }
+        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
@@ -128,10 +77,42 @@ public class AsientoTest {
     @Test
     public void testSetNumero() {
         System.out.println("setNumero");
-        String expected = "10";
-        asientoTest.setNumero("10");
-        String result = asientoTest.getNumero();
-        assertEquals(expected, result);
+        try {
+            asientoTested.setNumero(0);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue("0 no es un valor valido", true);
+        }
+        try {
+            asientoTested.setNumero(-1);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue("-1 no es un valor valido", true);
+        }
+        try {
+            asientoTested.setNumero(30);
+        } catch (IllegalArgumentException e) {
+            fail("30 es un valor valido");
+        }
+        try {
+            asientoTested.setNumero(31);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue("31 no es un valor valido", true);
+        }
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
     }
-    
+
+    @Test
+    public void testConstructor() {
+        try {
+            asientoTested = new Asiento('7', 7);
+
+        } catch (IllegalArgumentException e) {
+            assertTrue("Caracter 7 no es una fila valida", true);
+        }
+
+    }
+
 }

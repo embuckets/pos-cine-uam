@@ -5,58 +5,48 @@
  */
 package dominio;
 
+
 /**
  *
  * @author emilio
  */
 public class Asiento {
-
-    private String fila;
-    private String numero;
-
-    public Asiento(String fila, String numero) {
-        this.fila = fila;
+    private Character fila;
+    private Integer numero;
+    
+    // fila debe estar ser caracter entre a-z || A-Z
+    //numero deber ser un valor entre 1-MAX_POR_FILA(30)
+    public Asiento (Character fila, Integer numero) throws IllegalArgumentException {
+        setFila(fila);
+        setNumero(numero);
+    }
+    
+    public Asiento (Integer numero) {
+        this.fila = 'A';
         this.numero = numero;
     }
-
+    
     @Override
-    public String toString() {
-        return fila + "," + numero;
+    public String toString(){
+        return fila + numero.toString();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Asiento) {
-            Asiento asiento = (Asiento) o;
-            return fila.equalsIgnoreCase(asiento.getFila()) && numero.equalsIgnoreCase(asiento.getNumero());
+    
+    public void setFila(Character fila) throws IllegalArgumentException {
+        int valorDecimal = Character.getNumericValue(fila);
+        if (valorDecimal >= Character.getNumericValue('A') && valorDecimal <= Character.getNumericValue('Z')) {
+            this.fila = fila;
+        } else if (valorDecimal >= Character.getNumericValue('a') && valorDecimal <= Character.getNumericValue('z')){
+            this.fila = Character.toUpperCase(fila);
         } else {
-            return false;
+            throw new IllegalArgumentException();
         }
     }
-
-    @Override
-    public int hashCode() {
-        return fila.concat(numero).hashCode();
-    }
-
-    public String getFila() {
-        return fila;
-    }
-
-    public void setFila(String fila) {
-        if (fila.length() == 1) {
-            if (Character.isAlphabetic(fila.codePointAt(0))) {
-                this.fila = fila;
-            }
+    
+    public void setNumero(Integer numero) throws IllegalArgumentException {
+        if (numero > 0 && numero <= Sala.MAX_ASIENTOS_POR_FILA) {
+            this.numero = numero;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
 }

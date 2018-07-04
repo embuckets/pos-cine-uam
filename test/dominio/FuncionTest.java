@@ -5,7 +5,6 @@
  */
 package dominio;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
