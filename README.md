@@ -1,6 +1,6 @@
 # Proyecto final Programacion Orientada a Servicios
 
-CineUam es una servicio que permite ver las funciones del cine, compras boletos para una funcion y comprar alimentos.
+CineUam es una servicio que permite ver las funciones del cine, comprar boletos para una funcion y alimentos.
 
 ---
 
