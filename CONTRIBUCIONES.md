@@ -18,7 +18,7 @@ Al principio del proyecto no es tan importante ya que todo va sufrir muchos camb
         return StringUtil.capitalizeFirst(field);
 }
 ```
-Los comentarios no deben ser reduntes como 
+Los comentarios no deben ser redundantes como 
 ```java
 //incrementar contador
 contador++;
