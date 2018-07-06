@@ -6,6 +6,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -33,6 +34,40 @@ public class Sala {
         for (int i = 1; i <= numDeFilas; i++) {
             asientos.add(new Fila(i, asientosPorFila));
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.numero);
+        hash = 47 * hash + Objects.hashCode(this.tipo);
+        hash = 47 * hash + Objects.hashCode(this.asientos);
+        return hash;
+    }
+    
+    /**
+     * Son iguales si tienen el mismo numero.
+     * Los demas parametro no se toman en cuenta
+     * @param obj
+     * @return true si tienen el mismo numero
+     */
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sala other = (Sala) obj;
+        if (!this.numero.equalsIgnoreCase(other.numero)) {
+            return false;
+        }
+        return true;
     }
 
     public String getNumero() {
