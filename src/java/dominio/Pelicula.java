@@ -6,21 +6,31 @@
 package dominio;
 
 import java.time.Duration;
+import java.util.Objects;
 
 /**
  *
  * @author emilio
  */
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula> {
+
     private String nombre;
     private Duration duracion;
-    public static enum Clasificacion {AA, A, B, B15, C, D}
+
+    public static enum Clasificacion {
+        AA, A, B, B15, C, D
+    }
     private Clasificacion clasificacion;
-    
+
     public Pelicula(String nombre, Duration duracion, Pelicula.Clasificacion clasificacion) {
         this.nombre = nombre;
         this.duracion = duracion;
         this.clasificacion = clasificacion;
+    }
+
+    @Override
+    public int compareTo(Pelicula t) {
+        return nombre.compareToIgnoreCase(t.getNombre());
     }
 
     @Override
@@ -29,19 +39,38 @@ public class Pelicula {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof Pelicula) {
-            Pelicula pelicula = (Pelicula) o;
-            return nombre.equalsIgnoreCase(pelicula.getNombre());
-        }
-        else return false;
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.nombre);
+        hash = 41 * hash + Objects.hashCode(this.duracion);
+        hash = 41 * hash + Objects.hashCode(this.clasificacion);
+        return hash;
     }
 
+    /**
+     * Son iguales solamente si tienen el mismo nombre.
+     * Los demas parametros no se toman en cuenta
+     * @param obj
+     * @return true si tienen el mismo nombre
+     */
     @Override
-    public int hashCode() {
-        return nombre.hashCode();
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pelicula other = (Pelicula) obj;
+        if (!this.nombre.equalsIgnoreCase(other.nombre)) {
+            return false;
+        }
+        return true;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -65,7 +94,5 @@ public class Pelicula {
     public void setClasificacion(Clasificacion clasificacion) {
         this.clasificacion = clasificacion;
     }
-    
-    
-    
+
 }

@@ -6,12 +6,13 @@
 package dominio;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  *
  * @author emilio
  */
-public class Funcion {
+public class Funcion implements Comparable<Funcion> {
 
     private LocalDateTime fecha;
 
@@ -43,6 +44,59 @@ public class Funcion {
         this.sala = sala;
     }
 
+    @Override
+    public int compareTo(Funcion t) {
+        int comparacion;
+        if ((comparacion = this.pelicula.getNombre().compareToIgnoreCase(t.getPelicula().getNombre())) == 0) {
+            return (this.fecha.isEqual(t.getFecha()) ? 0 : (this.fecha.isBefore(t.getFecha()) ? -1 : 1));
+        } else {
+            return comparacion;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.fecha);
+        hash = 79 * hash + Objects.hashCode(this.formato);
+        hash = 79 * hash + Objects.hashCode(this.idioma);
+        hash = 79 * hash + Objects.hashCode(this.pelicula);
+        hash = 79 * hash + Objects.hashCode(this.sala);
+        return hash;
+    }
+
+    /**
+     * Son iguales si la fecha, pelicula y sala son iguales. Se verifica la
+     * igualdad llamando al metodo equals de fecha pelicula y sala. Los demas
+     * parametros no se toman en cuenta
+     *
+     * @param obj
+     * @return true si la fecha, pelicula y sala son iguales
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcion other = (Funcion) obj;
+        if (!this.fecha.isEqual(other.fecha)) {
+            return false;
+        }
+        if (!this.pelicula.equals(other.pelicula)) {
+            return false;
+        }
+        if (!this.sala.equals(other.sala)) {
+            return false;
+        }
+        return true;
+    }
+
     //Verifica si la funcion es en el mismo dia y despues de la hora del parametro
     public boolean esDespuesDe(LocalDateTime fechaActual) {
         return this.fecha.isAfter(fechaActual);
@@ -56,7 +110,6 @@ public class Funcion {
             return false;
         }
     }
-    
 
     public boolean esDoblada() {
         return this.idioma == Idioma.DOB;
