@@ -14,13 +14,13 @@ import java.util.Objects;
  */
 public class Pelicula implements Comparable<Pelicula> {
 
-    private String nombre;
-    private Duration duracion;
+    private final String nombre;
+    private final Duration duracion;
 
     public static enum Clasificacion {
         AA, A, B, B15, C, D
     }
-    private Clasificacion clasificacion;
+    private final Clasificacion clasificacion;
 
     public Pelicula(String nombre, Duration duracion, Pelicula.Clasificacion clasificacion) {
         this.nombre = nombre;
@@ -35,7 +35,7 @@ public class Pelicula implements Comparable<Pelicula> {
 
     @Override
     public String toString() {
-        return "[" + nombre + ", " + duracion.toMinutes() + ", " + clasificacion.toString();
+        return "Pelicula{" + "nombre=" + nombre + ", duracion=" + duracion + ", clasificacion=" + clasificacion + '}';
     }
 
     @Override
@@ -48,8 +48,9 @@ public class Pelicula implements Comparable<Pelicula> {
     }
 
     /**
-     * Son iguales solamente si tienen el mismo nombre.
-     * Los demas parametros no se toman en cuenta
+     * Son iguales solamente si tienen el mismo nombre. Los demas parametros no
+     * se toman en cuenta
+     *
      * @param obj
      * @return true si tienen el mismo nombre
      */
@@ -75,24 +76,22 @@ public class Pelicula implements Comparable<Pelicula> {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
+//    public void setNombre(String nombre) {
+//        this.nombre = nombre;
+//    }
     public Duration getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(Duration duracion) {
-        this.duracion = duracion;
-    }
-
+//    public void setDuracion(Duration duracion) {
+//        this.duracion = duracion;
+//    }
     public Clasificacion getClasificacion() {
         return clasificacion;
     }
-
-    public void setClasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-    }
+//
+//    public void setClasificacion(Clasificacion clasificacion) {
+//        this.clasificacion = clasificacion;
+//    }
 
 }

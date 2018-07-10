@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Funcion implements Comparable<Funcion> {
 
-    private LocalDateTime fecha;
+    private final LocalDateTime fecha;
 
     public static enum Formato {
         DOS_D, TRES_D
@@ -23,13 +23,13 @@ public class Funcion implements Comparable<Funcion> {
     public static enum Idioma {
         DOB, SUB
     }
-    private Formato formato;
-    private Idioma idioma;
-    private Pelicula pelicula;
-    private Sala sala;
+    private final Formato formato;
+    private final Idioma idioma;
+    private final Pelicula pelicula;
+    private final Sala sala;
 
     public Funcion(LocalDateTime fecha, Pelicula pelicula, Sala sala) {
-        this.fecha = fecha;
+        this.fecha = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
         this.pelicula = pelicula;
         this.sala = sala;
         this.formato = Formato.DOS_D;
@@ -37,13 +37,24 @@ public class Funcion implements Comparable<Funcion> {
     }
 
     public Funcion(LocalDateTime fecha, Formato formato, Idioma idioma, Pelicula pelicula, Sala sala) {
-        this.fecha = fecha;
+        this.fecha = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
         this.formato = formato;
         this.idioma = idioma;
         this.pelicula = pelicula;
         this.sala = sala;
     }
 
+    @Override
+    public String toString() {
+        return "Funcion{" + "fecha=" + fecha + ", formato=" + formato + ", idioma=" + idioma + ", pelicula=" + pelicula + ", sala=" + sala + '}';
+    }
+
+    /**
+     * Ordena la Funcion primero por nombre y despues por fecha.
+     *
+     * @param t
+     * @return
+     */
     @Override
     public int compareTo(Funcion t) {
         int comparacion;
@@ -131,40 +142,35 @@ public class Funcion implements Comparable<Funcion> {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
-
+//    private void setFecha(LocalDateTime fecha) {
+//        this.fecha = fecha;
+//    }
     public Formato getFormato() {
         return formato;
     }
 
-    public void setFormato(Formato formato) {
-        this.formato = formato;
-    }
-
+//    public void setFormato(Formato formato) {
+//        this.formato = formato;
+//    }
     public Idioma getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(Idioma idioma) {
-        this.idioma = idioma;
-    }
-
+//    public void setIdioma(Idioma idioma) {
+//        this.idioma = idioma;
+//    }
     public Pelicula getPelicula() {
         return pelicula;
     }
 
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
-    }
-
+//    public void setPelicula(Pelicula pelicula) {
+//        this.pelicula = pelicula;
+//    }
     public Sala getSala() {
         return sala;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
-
+//    public void setSala(Sala sala) {
+//        this.sala = sala;
+//    }
 }

@@ -7,7 +7,7 @@ package dominio;
 
 import java.util.ArrayList;
 
-/**
+/** Tal vez sea mejor quitar esta clase y manejar los asientos como lista de lista de asientos
  *
  * @author emilio
  */
