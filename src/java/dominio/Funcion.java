@@ -5,7 +5,8 @@
  */
 package dominio;
 
-import java.time.LocalDateTime;
+import java.text.DecimalFormat;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Objects;
  */
 public class Funcion implements Comparable<Funcion> {
 
-    private final LocalDateTime fecha;
+    private final LocalTime hora; //deberia ser solo LocalTime
 
     public static enum Formato {
         DOS_D, TRES_D
@@ -28,29 +29,34 @@ public class Funcion implements Comparable<Funcion> {
     private final Pelicula pelicula;
     private final Sala sala;
 
-    public Funcion(LocalDateTime fecha, Pelicula pelicula, Sala sala) {
-        this.fecha = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
+    public Funcion(LocalTime fecha, Pelicula pelicula, Sala sala) {
+        this.hora = LocalTime.of(fecha.getHour(), fecha.getMinute());
         this.pelicula = pelicula;
         this.sala = sala;
         this.formato = Formato.DOS_D;
         this.idioma = Idioma.SUB;
     }
 
-    public Funcion(LocalDateTime fecha, Formato formato, Idioma idioma, Pelicula pelicula, Sala sala) {
-        this.fecha = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
+    public Funcion(LocalTime fecha, Formato formato, Idioma idioma, Pelicula pelicula, Sala sala) {
+        this.hora = LocalTime.of(fecha.getHour(), fecha.getMinute());
         this.formato = formato;
         this.idioma = idioma;
         this.pelicula = pelicula;
         this.sala = sala;
     }
+    
+    public String getHoraYFecha(){
+        DecimalFormat formatter = new DecimalFormat("###");
+        return "" + hora.getHour() + ":" + formatter.format(hora.getMinute());//no funciona deberia salir 15:00 pero sale 15:0
+    }
 
     @Override
     public String toString() {
-        return "Funcion{" + "fecha=" + fecha + ", formato=" + formato + ", idioma=" + idioma + ", pelicula=" + pelicula + ", sala=" + sala + '}';
+        return "Funcion{" + "fecha=" + hora + ", formato=" + formato + ", idioma=" + idioma + ", pelicula=" + pelicula + ", sala=" + sala + '}';
     }
 
     /**
-     * Ordena la Funcion primero por nombre y despues por fecha.
+     * Ordena la Funcion primero por nombre y despues por hora.
      *
      * @param t
      * @return
@@ -59,7 +65,7 @@ public class Funcion implements Comparable<Funcion> {
     public int compareTo(Funcion t) {
         int comparacion;
         if ((comparacion = this.pelicula.getNombre().compareToIgnoreCase(t.getPelicula().getNombre())) == 0) {
-            return (this.fecha.isEqual(t.getFecha()) ? 0 : (this.fecha.isBefore(t.getFecha()) ? -1 : 1));
+            return this.hora.compareTo(t.getHora());
         } else {
             return comparacion;
         }
@@ -68,7 +74,7 @@ public class Funcion implements Comparable<Funcion> {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.fecha);
+        hash = 79 * hash + Objects.hashCode(this.hora);
         hash = 79 * hash + Objects.hashCode(this.formato);
         hash = 79 * hash + Objects.hashCode(this.idioma);
         hash = 79 * hash + Objects.hashCode(this.pelicula);
@@ -77,12 +83,12 @@ public class Funcion implements Comparable<Funcion> {
     }
 
     /**
-     * Son iguales si la fecha, pelicula y sala son iguales. Se verifica la
-     * igualdad llamando al metodo equals de fecha pelicula y sala. Los demas
-     * parametros no se toman en cuenta
+     * Son iguales si la hora, pelicula y sala son iguales. Se verifica la
+ igualdad llamando al metodo equals de hora pelicula y sala. Los demas
+ parametros no se toman en cuenta
      *
      * @param obj
-     * @return true si la fecha, pelicula y sala son iguales
+     * @return true si la hora, pelicula y sala son iguales
      */
     @Override
     public boolean equals(Object obj) {
@@ -96,7 +102,7 @@ public class Funcion implements Comparable<Funcion> {
             return false;
         }
         final Funcion other = (Funcion) obj;
-        if (!this.fecha.isEqual(other.fecha)) {
+        if (this.hora.compareTo(other.hora) != 0) {
             return false;
         }
         if (!this.pelicula.equals(other.pelicula)) {
@@ -109,18 +115,18 @@ public class Funcion implements Comparable<Funcion> {
     }
 
     //Verifica si la funcion es en el mismo dia y despues de la hora del parametro
-    public boolean esDespuesDe(LocalDateTime fechaActual) {
-        return this.fecha.isAfter(fechaActual);
+    public boolean esDespuesDe(LocalTime fechaActual) {
+        return this.hora.isAfter(fechaActual);
     }
 
-    public boolean esEnMismoDia(LocalDateTime fecha) {
-        if (this.fecha.getYear() == fecha.getYear()
-                && this.fecha.getDayOfYear() == fecha.getDayOfYear()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean esEnMismoDia(LocalTime hora) {
+//        if (this.hora.getYear() == hora.getYear()
+//                && this.hora.getDayOfYear() == hora.getDayOfYear()) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public boolean esDoblada() {
         return this.idioma == Idioma.DOB;
@@ -138,12 +144,12 @@ public class Funcion implements Comparable<Funcion> {
         return this.formato == Formato.DOS_D;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalTime getHora() {
+        return hora;
     }
 
-//    private void setFecha(LocalDateTime fecha) {
-//        this.fecha = fecha;
+//    private void setFecha(LocalTime hora) {
+//        this.hora = hora;
 //    }
     public Formato getFormato() {
         return formato;

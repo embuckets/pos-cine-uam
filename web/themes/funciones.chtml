@@ -1,0 +1,32 @@
+    {#tabla}
+    <head>
+        <title>Cine Uam Azc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Cine Uam Azc</h1>
+        <table border="1" width="1" cellspacing="3" cellpadding="3">
+            <thead>
+                <tr>
+                    <th>funciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% loop in $funciones as $pel:$att %}
+                <tr>
+                    <td>{$pel}</td>
+                    {% loop in $att as $a %}
+                        <td>
+                            <form action="/cine/asientos" method="post">
+                            <input type="hidden" name="pid" value="{$pel}">
+                            <input type="hidden" name="fid" value="{$a}">
+                            <input type="submit" value="{$a}">
+                    {% endloop %}
+                </tr>
+                {% endloop %}
+            </tbody>
+        </table>
+
+    </body>
+    {#}
