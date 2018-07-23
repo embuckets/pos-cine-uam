@@ -6,6 +6,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /** Tal vez sea mejor quitar esta clase y manejar los asientos como lista de lista de asientos
  *
@@ -24,6 +25,13 @@ public class Fila {
             asientos.add(new Asiento(c, i));
         }
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero, asientos);
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -31,49 +31,48 @@ import persistencia.Factory;
  */
 public class ProgramaDelDia {
 
-    private static final LocalDate fecha;
-    private static final Map<Pelicula, List<Funcion>> funciones;
-    
-    static {
-        fecha = Factory.creaFechaDeHoy();
-        funciones = Factory.creaMapaDelDia();
+    private final LocalDate fecha;
+    private final Map<Pelicula, List<Funcion>> funciones;
+
+//    static {
+//        fecha = Factory.creaFechaDeHoy();
+//        funciones = Factory.creaMapaDelDia();
+//    }
+    public ProgramaDelDia(LocalDate dia) {
+        this.fecha = dia;
+        this.funciones = Factory.creaMapaDelDia(dia);
+
     }
-    
-    public ProgramaDelDia(){}
 
 //    public ProgramaDelDia(LocalDate fecha, Map<Pelicula, List<Funcion>> funciones) {
 //        this.fecha = fecha;
 //        this.funciones = funciones;
 //    }
-
 //    public ProgramaDelDia(LocalDate fecha) {
 //        this.fecha = fecha;
 //        this.funciones = new HashMap<Pelicula, List<Funcion>>();
 //    }
-
     /**
      * TODO: Esta clase solo deberia preocuparse solo de guardar funciones no de
      * peliculas sin funciones. Agrega la pelicula si no existe
      *
      * @return true si la pelicula no existe
      */
-    public boolean agregarPelicula(Pelicula pelicula) {
-        if (!funciones.containsKey(pelicula)) {
-            funciones.put(pelicula, null);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean agregarPelicula(Pelicula pelicula) {
+//        if (!funciones.containsKey(pelicula)) {
+//            funciones.put(pelicula, null);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
-    public void agregarFuncion(Pelicula pelicula, LocalTime hora, Sala sala, Funcion.Formato formato, Funcion.Idioma idioma) {
-        if (this.funciones.containsKey(pelicula)){
-            List<Funcion> funcionesDeLaPelicula = this.funciones.get(pelicula);
-            funcionesDeLaPelicula.add(new Funcion(LocalTime.of(hora.getHour(), hora.getMinute()), formato, idioma, pelicula, sala));
-        }
-        
-
-    }
+//    public void agregarFuncion(Pelicula pelicula, LocalTime hora, Sala sala, Funcion.Formato formato, Funcion.Idioma idioma) {
+//        if (this.funciones.containsKey(pelicula)) {
+//            List<Funcion> funcionesDeLaPelicula = this.funciones.get(pelicula);
+//            funcionesDeLaPelicula.add(new Funcion(LocalTime.of(hora.getHour(), hora.getMinute()), formato, idioma, pelicula, sala));
+//        }
+//    }
 
     /**
      * Agrega la funcion al programa del dia. Si la pelicula de la funcion no
@@ -83,19 +82,19 @@ public class ProgramaDelDia {
      * @param funcion
      * @return
      */
-    public boolean agregarFuncion(Funcion funcion) {
-        if (!funciones.containsKey(funcion.getPelicula())) {
-            List<Funcion> nuevaLista = new ArrayList<Funcion>();
-            nuevaLista.add(funcion);
-            funciones.put(funcion.getPelicula(), nuevaLista);
-            return true;
-        } else {
-            List<Funcion> listaActual = funciones.get(funcion.getPelicula());
-            listaActual.add(funcion);
-            funciones.put(funcion.getPelicula(), listaActual);
-            return true;
-        }
-    }
+//    public boolean agregarFuncion(Funcion funcion) {
+//        if (!funciones.containsKey(funcion.getPelicula())) {
+//            List<Funcion> nuevaLista = new ArrayList<Funcion>();
+//            nuevaLista.add(funcion);
+//            funciones.put(funcion.getPelicula(), nuevaLista);
+//            return true;
+//        } else {
+//            List<Funcion> listaActual = funciones.get(funcion.getPelicula());
+//            listaActual.add(funcion);
+//            funciones.put(funcion.getPelicula(), listaActual);
+//            return true;
+//        }
+//    }
 
 //    /**
 //     * ERROR: no checa si la la pelicula en la funcion es igual al parametro
@@ -132,7 +131,7 @@ public class ProgramaDelDia {
         }
     }
 
-    public static List<Pelicula> getPeliculas() {
+    public List<Pelicula> getPeliculas() {
         return Collections.unmodifiableList(funciones.keySet().stream().collect(Collectors.toList()));
 //        return Arrays.asList(funciones.keySet().toArray());
     }

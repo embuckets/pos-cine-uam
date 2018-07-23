@@ -35,16 +35,17 @@ public class Pelicula implements Comparable<Pelicula> {
 
     @Override
     public String toString() {
-        return "Pelicula{" + "nombre=" + nombre + ", duracion=" + duracion + ", clasificacion=" + clasificacion + '}';
+        return nombre;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.nombre);
-        hash = 41 * hash + Objects.hashCode(this.duracion);
-        hash = 41 * hash + Objects.hashCode(this.clasificacion);
-        return hash;
+        return Objects.hash(nombre);
+//        int hash = 7;
+//        hash = 41 * hash + Objects.hashCode(this.nombre);
+//        hash = 41 * hash + Objects.hashCode(this.duracion);
+//        hash = 41 * hash + Objects.hashCode(this.clasificacion);
+//        return hash;
     }
 
     /**

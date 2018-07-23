@@ -39,16 +39,17 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" + "numero=" + numero + ", tipo=" + tipo + ", asientos=" + asientos + '}';
+        return "Sala{" + "numero=" + numero + ", tipo=" + tipo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.numero);
-        hash = 47 * hash + Objects.hashCode(this.tipo);
-        hash = 47 * hash + Objects.hashCode(this.asientos);
-        return hash;
+        return Objects.hash(numero, tipo);
+//        int hash = 7;
+//        hash = 47 * hash + Objects.hashCode(this.numero);
+//        hash = 47 * hash + Objects.hashCode(this.tipo);
+//        hash = 47 * hash + Objects.hashCode(this.asientos);
+//        return hash;
     }
 
     /**

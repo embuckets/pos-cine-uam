@@ -19,6 +19,7 @@ public class CineUamApp extends Application {
     public synchronized Restlet createInboundRoot(){
         Router router = new Router(getContext());
         router.attach("/funciones", FuncionesResource.class);
+        router.attach("/asientos", AsientosResource.class);
         
         return router;
     }
