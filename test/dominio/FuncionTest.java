@@ -50,41 +50,49 @@ public class FuncionTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void testHash(){
+        System.out.println("TestHash");
+        System.out.println("funcionTested hash: " + funcionTested.hashCode());
+        Funcion otraFuncion = new Funcion(LocalDateTime.now().plusDays(1), peliculaTested, salaTested);
+        System.out.println("otraFuncion" + otraFuncion.hashCode());
+    }
 
     /**
      * Test of esDespuesDe method, of class Funcion.
      */
-    @Test
-    public void testEsDespuesDe() {
-        LocalDateTime after = LocalDateTime.of(2018, Month.JUNE, 26, 13, 31);
-        boolean result = funcionTested.esDespuesDe(after);
-        assertFalse(result);
-        LocalDateTime before = LocalDateTime.of(2018, Month.JUNE, 26, 13, 0);
-        result = funcionTested.esDespuesDe(before);
-        assertTrue(result);
-        LocalDateTime dayAfter = LocalDateTime.of(2018, Month.JUNE, 27, 13, 30);
-        result = funcionTested.esDespuesDe(dayAfter);
-        assertFalse(result);
-        LocalDateTime mismo = LocalDateTime.of(2018, Month.JUNE, 26, 13, 30);
-        result = funcionTested.esDespuesDe(mismo);
-        assertFalse(result);
-    }
-    
-    @Test
-    public void testEsEnMismoDia() {
-        LocalDateTime aMinuteAfter = LocalDateTime.of(2018, Month.JUNE, 26, 13, 31);
-        boolean result = funcionTested.esEnMismoDia(aMinuteAfter);
-        assertTrue(result);
-        LocalDateTime halfHourBefore = LocalDateTime.of(2018, Month.JUNE, 26, 13, 0);
-        result = funcionTested.esEnMismoDia(halfHourBefore);
-        assertTrue(result);
-        LocalDateTime aDayAfter = LocalDateTime.of(2018, Month.JUNE, 27, 13, 30);
-        result = funcionTested.esEnMismoDia(aDayAfter);
-        assertFalse(result);
-        LocalDateTime sameDayAndTime = LocalDateTime.of(2018, Month.JUNE, 26, 13, 30);
-        result = funcionTested.esEnMismoDia(sameDayAndTime);
-        assertTrue(result);
-    }
+//    @Test
+//    public void testEsDespuesDe() {
+//        LocalDateTime after = LocalDateTime.of(2018, Month.JUNE, 26, 13, 31);
+//        boolean result = funcionTested.esDespuesDe(after);
+//        assertFalse(result);
+//        LocalDateTime before = LocalDateTime.of(2018, Month.JUNE, 26, 13, 0);
+//        result = funcionTested.esDespuesDe(before);
+//        assertTrue(result);
+//        LocalDateTime dayAfter = LocalDateTime.of(2018, Month.JUNE, 27, 13, 30);
+//        result = funcionTested.esDespuesDe(dayAfter);
+//        assertFalse(result);
+//        LocalDateTime mismo = LocalDateTime.of(2018, Month.JUNE, 26, 13, 30);
+//        result = funcionTested.esDespuesDe(mismo);
+//        assertFalse(result);
+//    }
+//    
+//    @Test
+//    public void testEsEnMismoDia() {
+//        LocalDateTime aMinuteAfter = LocalDateTime.of(2018, Month.JUNE, 26, 13, 31);
+//        boolean result = funcionTested.esEnMismoDia(aMinuteAfter);
+//        assertTrue(result);
+//        LocalDateTime halfHourBefore = LocalDateTime.of(2018, Month.JUNE, 26, 13, 0);
+//        result = funcionTested.esEnMismoDia(halfHourBefore);
+//        assertTrue(result);
+//        LocalDateTime aDayAfter = LocalDateTime.of(2018, Month.JUNE, 27, 13, 30);
+//        result = funcionTested.esEnMismoDia(aDayAfter);
+//        assertFalse(result);
+//        LocalDateTime sameDayAndTime = LocalDateTime.of(2018, Month.JUNE, 26, 13, 30);
+//        result = funcionTested.esEnMismoDia(sameDayAndTime);
+//        assertTrue(result);
+//    }
 //
 //    /**
 //     * Test of getFecha method, of class Funcion.

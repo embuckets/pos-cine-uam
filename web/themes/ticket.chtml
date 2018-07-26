@@ -1,0 +1,33 @@
+{#tabla}
+<head>
+<title>Ticket</title>
+
+<meta charsef="UTF-8">
+<meta name ="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+   <table>
+        <tbody>
+        {% loop in $producto as $p %}
+            <tr>
+                <td>{$p.producto.producto}</td>
+                <td>{$p.cantidad}</td>
+                <td>{$p.subtotal}</td>
+            </tr>
+        {% endloop %}
+            <tr>
+                <td>Total</td>
+                <td>{$total}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+
+</body>
+
+
+
+{#}
+
