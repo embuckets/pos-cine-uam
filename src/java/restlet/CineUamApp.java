@@ -20,6 +20,8 @@ public class CineUamApp extends Application {
         Router router = new Router(getContext());
         router.attach("/funciones", FuncionesResource.class);
         router.attach("/asientos", AsientosResource.class);
+        router.attach("/golosinas", GolosinasResource.class);
+        router.attach("", IndexResource.class);
         
         return router;
     }

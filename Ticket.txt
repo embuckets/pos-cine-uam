@@ -1,0 +1,4 @@
+p1,80.00,Palomitas,ACT II,Grandes
+p2,50.00,Refresco,Coca Cola,500 ml
+p3,35.00,Hot-Dogs,Fud,250 g
+p4,40.00,Nachos,La Sabrosa,350 g
