@@ -5,13 +5,9 @@
  */
 package dominio;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -27,16 +23,15 @@ public class Funcion implements Comparable<Funcion> {
     public static enum Idioma {
         DOB, SUB
     }
-    
+
     private final int id;
     private final Formato formato;
     private final Idioma idioma;
     private final Pelicula pelicula;
     private final Sala sala;
-    private final LocalDateTime hora; //deberia ser solo LocalDateTime
+    private final LocalDateTime hora;
 
     public Funcion(LocalDateTime fecha, Pelicula pelicula, Sala sala) {
-//        this.hora = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
         this.hora = LocalDateTime.of(fecha.toLocalDate(), fecha.toLocalTime().truncatedTo(ChronoUnit.MINUTES));
         this.pelicula = pelicula;
         this.sala = sala;
@@ -46,7 +41,6 @@ public class Funcion implements Comparable<Funcion> {
     }
 
     public Funcion(LocalDateTime fecha, Formato formato, Idioma idioma, Pelicula pelicula, Sala sala) {
-//        this.hora = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), fecha.getHour(), fecha.getMinute());
         this.hora = LocalDateTime.of(fecha.toLocalDate(), fecha.toLocalTime().truncatedTo(ChronoUnit.MINUTES));
         this.formato = formato;
         this.idioma = idioma;
@@ -54,11 +48,10 @@ public class Funcion implements Comparable<Funcion> {
         this.sala = sala;
         this.id = hashCode();
     }
-    
-    public int getId(){
+
+    public int getId() {
         return this.id;
     }
-    
 
     public String getHoraYMinuto() {
 
@@ -89,14 +82,6 @@ public class Funcion implements Comparable<Funcion> {
     @Override
     public int hashCode() {
         return Objects.hash(hora.toString(), sala, pelicula);
-//        return Objects.hash(hora, formato, idioma, pelicula, sala);
-//        int hash = 7;
-//        hash = 79 * hash + Objects.hashCode(this.hora);
-//        hash = 79 * hash + Objects.hashCode(this.formato);
-//        hash = 79 * hash + Objects.hashCode(this.idioma);
-//        hash = 79 * hash + Objects.hashCode(this.pelicula);
-//        hash = 79 * hash + Objects.hashCode(this.sala);
-//        return hash;
     }
 
     /**
@@ -131,19 +116,6 @@ public class Funcion implements Comparable<Funcion> {
         return true;
     }
 
-    //Verifica si la funcion es en el mismo dia y despues de la hora del parametro
-    public boolean esDespuesDe(LocalDateTime fechaActual) {
-        return this.hora.isAfter(fechaActual);
-    }
-
-//    public boolean esEnMismoDia(LocalDateTime hora) {
-//        if (this.hora.getYear() == hora.getYear()
-//                && this.hora.getDayOfYear() == hora.getDayOfYear()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
     public boolean esDoblada() {
         return this.idioma == Idioma.DOB;
     }
@@ -164,35 +136,20 @@ public class Funcion implements Comparable<Funcion> {
         return hora;
     }
 
-//    private void setFecha(LocalDateTime hora) {
-//        this.hora = hora;
-//    }
     public Formato getFormato() {
         return formato;
     }
 
-//    public void setFormato(Formato formato) {
-//        this.formato = formato;
-//    }
     public Idioma getIdioma() {
         return idioma;
     }
 
-//    public void setIdioma(Idioma idioma) {
-//        this.idioma = idioma;
-//    }
     public Pelicula getPelicula() {
         return pelicula;
     }
 
-//    public void setPelicula(Pelicula pelicula) {
-//        this.pelicula = pelicula;
-//    }
     public Sala getSala() {
         return sala;
     }
 
-//    public void setSala(Sala sala) {
-//        this.sala = sala;
-//    }
 }

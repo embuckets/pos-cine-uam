@@ -10,7 +10,7 @@ package modelo;
  * @author Laura
  */
 public class LineaVenta {
-    
+
     private Producto producto;
     private int cantidad;
     private float subtotal;
@@ -20,8 +20,6 @@ public class LineaVenta {
         this.cantidad = cantidad;
         subtotal = calcularSubtotal();
     }
-    
-    
 
     public Producto getProducto() {
         return producto;
@@ -34,19 +32,15 @@ public class LineaVenta {
     public float getSubtotal() {
         return subtotal;
     }
-    
-    private float calcularSubtotal(){
-    
-    return  producto.getPrecio()*cantidad;
+
+    private float calcularSubtotal() {
+
+        return producto.getPrecio() * cantidad;
     }
 
     @Override
     public String toString() {
         return "LineaVenta{" + "producto=" + producto + ", cantidad=" + cantidad + ", subtotal=" + subtotal + '}';
     }
-    
-    
-    
-    
-    
+
 }

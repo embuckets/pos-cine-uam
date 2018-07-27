@@ -1,4 +1,3 @@
-
 package modelo;
 
 /**
@@ -6,6 +5,7 @@ package modelo;
  * @author Laura
  */
 public class Producto {
+
     String id_producto;
     String producto;
     float precio;
@@ -64,9 +64,5 @@ public class Producto {
     public String toString() {
         return "Producto{" + "id_producto=" + id_producto + ", producto=" + producto + ", precio=" + precio + ", marca=" + marca + ", cantidadNeta=" + cantidadNeta + '}';
     }
-    
-    
-    
-    
-    
+
 }

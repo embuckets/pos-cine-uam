@@ -10,7 +10,7 @@ package modelo;
  * @author Fer
  */
 public class Usuario {
-    
+
     private String id_usuario;
     private String nombre;
     private String primerAp;
@@ -59,7 +59,5 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", primerAp=" + primerAp + ", segungoAp=" + segungoAp + '}';
     }
-    
-    
-    
+
 }

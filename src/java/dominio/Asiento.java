@@ -14,8 +14,6 @@ public class Asiento {
     private Character fila;
     private Integer numero;
 
-    // fila debe estar ser caracter entre a-z || A-Z
-    //numero deber ser un valor entre 1-MAX_POR_FILA(30)
     public Asiento(Character fila, Integer numero) throws IllegalArgumentException {
         setFila(fila);
         setNumero(numero);

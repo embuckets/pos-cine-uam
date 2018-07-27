@@ -1,4 +1,3 @@
-
 package modelo;
 
 import java.time.LocalDate;
@@ -9,19 +8,19 @@ import java.util.LinkedList;
  * @author Laura
  */
 public class Venta {
-    
-  private  String idVenta;
-  private   float total;
-  private  LocalDate fecha;
-  private   LinkedList<LineaVenta> subtotales;
-  private Usuario usuario;
+
+    private String idVenta;
+    private float total;
+    private LocalDate fecha;
+    private LinkedList<LineaVenta> subtotales;
+    private Usuario usuario;
 
     public Venta(String idVenta, Usuario usuario) {
         this.idVenta = idVenta;
         total = 0;
         fecha = LocalDate.now();
         subtotales = new LinkedList<>();
-        this.usuario= usuario;
+        this.usuario = usuario;
     }
 
     public String getIdVenta() {
@@ -63,42 +62,24 @@ public class Venta {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
-    
-  
-  
-  public void anadirProducto(LineaVenta lineaVenta){
+
+    public void anadirProducto(LineaVenta lineaVenta) {
         subtotales.add(lineaVenta);
-  }
-  
-  
-  public float calcularTotal(){
-      
-      return  (float) subtotales.stream().mapToDouble(LineaVenta::getSubtotal).sum();
-//        if(!subtotales.isEmpty()){
-//            
-//            
-//            total+=subtotales.getLast().getSubtotal();
-//        
-//        }
-        
-        
-//    return total;
     }
-  
-  public LinkedList <LineaVenta> getLineaVentas(){
-  
-            return subtotales;
-  }
+
+    public float calcularTotal() {
+
+        return (float) subtotales.stream().mapToDouble(LineaVenta::getSubtotal).sum();
+    }
+
+    public LinkedList<LineaVenta> getLineaVentas() {
+
+        return subtotales;
+    }
 
     @Override
     public String toString() {
         return "Venta{" + "idVenta=" + idVenta + ", total=" + total + ", fecha=" + fecha + ", subtotales=" + subtotales + '}';
     }
-  
-  
+
 }
-
-

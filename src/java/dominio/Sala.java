@@ -45,11 +45,6 @@ public class Sala {
     @Override
     public int hashCode() {
         return Objects.hash(numero, tipo);
-//        int hash = 7;
-//        hash = 47 * hash + Objects.hashCode(this.numero);
-//        hash = 47 * hash + Objects.hashCode(this.tipo);
-//        hash = 47 * hash + Objects.hashCode(this.asientos);
-//        return hash;
     }
 
     /**
@@ -80,17 +75,8 @@ public class Sala {
     public String getNumero() {
         return numero;
     }
-//
-//    public void setNumero(String numero) {
-//        this.numero = numero;
-//    }
 
     public Tipo getTipo() {
         return tipo;
     }
-//
-//    public void setTipo(Tipo tipo) {
-//        this.tipo = tipo;
-//    }
-
 }

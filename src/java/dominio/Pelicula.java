@@ -41,11 +41,6 @@ public class Pelicula implements Comparable<Pelicula> {
     @Override
     public int hashCode() {
         return Objects.hash(nombre);
-//        int hash = 7;
-//        hash = 41 * hash + Objects.hashCode(this.nombre);
-//        hash = 41 * hash + Objects.hashCode(this.duracion);
-//        hash = 41 * hash + Objects.hashCode(this.clasificacion);
-//        return hash;
     }
 
     /**
@@ -77,22 +72,12 @@ public class Pelicula implements Comparable<Pelicula> {
         return nombre;
     }
 
-//    public void setNombre(String nombre) {
-//        this.nombre = nombre;
-//    }
     public Duration getDuracion() {
         return duracion;
     }
 
-//    public void setDuracion(Duration duracion) {
-//        this.duracion = duracion;
-//    }
     public Clasificacion getClasificacion() {
         return clasificacion;
     }
-//
-//    public void setClasificacion(Clasificacion clasificacion) {
-//        this.clasificacion = clasificacion;
-//    }
 
 }

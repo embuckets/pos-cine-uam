@@ -15,22 +15,24 @@ import java.time.LocalDate;
  * @author emilio
  */
 public class FuncionesTemplate {
-    public static String funcionesHtml(){
+
+    public static String funcionesHtml() {
         Theme theme = new Theme("web/themes", "");
         Chunk html = theme.makeChunk("funciones#tabla");
         html.set("funciones", Cine.getFunciones());//getFuncionesString
         html.set("dias", Cine.getDias());
-        
+
         return html.toString();
     }
-    public static String funcionesHtml(LocalDate dia){
+
+    public static String funcionesHtml(LocalDate dia) {
         Theme theme = new Theme("web/themes", "");
         Chunk html = theme.makeChunk("funciones#tabla");
         html.set("funciones", Cine.getFunciones(dia));//getFuncionesString
         html.set("dias", Cine.getDias());
         html.set("selected", dia.toString());
-        
+
         return html.toString();
-        
+
     }
 }
