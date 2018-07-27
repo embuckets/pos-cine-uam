@@ -8,7 +8,6 @@ package restlet;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.time.LocalDate;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
 import org.restlet.representation.FileRepresentation;
@@ -34,6 +33,7 @@ public class AsientosResource extends ServerResource {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
             writer.write("<!DOCTYPE html>\n"
                     + "<html>\n"
+                    + "<a href=\"/cine\">Home</a><br>"
                     + "<p>" + id + "</p>");
             writer.write("\n</html>");
             writer.flush();

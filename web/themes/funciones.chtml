@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <a href="/cine">Home</a><br>
         <h1>Cine Uam Azc</h1>
         <form action="/cine/funciones" method="post">
             <select name="dia">

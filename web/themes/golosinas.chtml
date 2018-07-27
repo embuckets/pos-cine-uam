@@ -19,6 +19,7 @@
 </thead>
 
     <tbody>
+        <a href="/cine">Home</a><br>
         {% loop in $listaprod as $producto %}
         <tr>
             <td>

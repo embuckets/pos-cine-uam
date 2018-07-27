@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <a href="/cine">Home</a><br>
    <table>
         <tbody>
         {% loop in $producto as $p %}
