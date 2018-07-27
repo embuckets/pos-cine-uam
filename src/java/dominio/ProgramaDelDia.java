@@ -6,9 +6,12 @@
 package dominio;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import persistencia.Factory;
 
@@ -62,5 +65,18 @@ public class ProgramaDelDia {
     public Map<Pelicula, List<Funcion>> getTodasLasFunciones() {
         return Collections.unmodifiableMap(this.funciones);
     }
+    
+    public Map<Pelicula, List<Funcion>> getTodasLasFunciones(LocalTime hora) {
+        Map<Pelicula, List<Funcion>> result = new HashMap<>();
+        Set<Pelicula> peliculas = funciones.keySet();
+        for(Pelicula pelicula : peliculas){
+            List<Funcion> funcionesList = funciones.get(pelicula).stream().filter(f -> f.getHora().toLocalTime().isAfter(hora)).collect(Collectors.toList());
+            result.put(pelicula, funcionesList);
+        }
+        
+        
+        return Collections.unmodifiableMap(result);
+    }
+    
 
 }

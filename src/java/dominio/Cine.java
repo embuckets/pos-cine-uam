@@ -6,6 +6,7 @@
 package dominio;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +35,15 @@ public class Cine {
     }
 
     public static Map<Pelicula, List<Funcion>> getFunciones() {
-        return programa.get(LocalDate.now()).getTodasLasFunciones();
+        return programa.get(LocalDate.now()).getTodasLasFunciones(LocalTime.now());
     }
 
     public static Map<Pelicula, List<Funcion>> getFunciones(LocalDate dia) {
-        return programa.get(dia).getTodasLasFunciones();
+        if (dia.isAfter(LocalDate.now())) {
+            return programa.get(dia).getTodasLasFunciones();
+        } else {
+            return programa.get(LocalDate.now()).getTodasLasFunciones(LocalTime.now());
+        }
     }
 
 }
