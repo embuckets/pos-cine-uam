@@ -1,0 +1,67 @@
+{#tabla}
+<head>
+<title>Fuente de Sodas</title>
+
+<meta charsef="UTF-8">
+<meta name ="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<form action="/cine/golosinas" method="post">
+    <table>
+    
+<thead>
+    <tr>
+        <th>Productos</th>
+
+    </tr>
+</thead>
+
+    <tbody>
+        {% loop in $listaprod as $producto %}
+        <tr>
+            <td>
+            {$producto.producto}
+            
+            </td>
+
+            <td>
+            {$producto.marca}
+            
+            </td>
+            
+            <td>
+            {$producto.cantidad_neta}
+            
+            </td>
+
+             <td>
+            {$producto.precio}
+            
+            </td>
+
+               <td>
+                <input type="number" name="cantidades" min="0" max="100" value="0">
+               </td>
+
+        </tr>
+        
+        {% endloop %}
+        
+
+    </tbody>
+
+
+</table>
+
+    <input type= "submit" value = "comprar">
+</form>
+
+
+
+</body>
+
+
+
+{#}

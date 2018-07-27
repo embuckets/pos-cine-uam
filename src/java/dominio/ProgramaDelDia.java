@@ -5,65 +5,33 @@
  */
 package dominio;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import persistencia.Factory;
 
+/**
+ * NOTES: Esta clase debe ser la encargada de crear las funciones para evitar
+ * errores en la fecha
+ */
 /**
  *
  * @author emilio
  */
 public class ProgramaDelDia {
 
-    private LocalDate fecha;
+    private final LocalDate fecha;
+    private final Map<Pelicula, List<Funcion>> funciones;
 
-    private Map<Pelicula, List<Funcion>> funciones;
+    public ProgramaDelDia(LocalDate dia) {
+        this.fecha = dia;
+        this.funciones = Factory.creaMapaDelDia(dia);
 
-    public ProgramaDelDia(LocalDate fecha, Map<Pelicula, List<Funcion>> funciones) {
-        this.fecha = fecha;
-        this.funciones = funciones;
-    }
-
-    public ProgramaDelDia(LocalDate fecha) {
-        this.fecha = fecha;
-        this.funciones = new HashMap<Pelicula, List<Funcion>>();
-    }
-
-    /**
-     * Agrega la pelicula si no existe
-     *
-     * @return true si la pelicula no existe
-     */
-    public boolean agregarPelicula(Pelicula pelicula) {
-        if (!funciones.containsKey(pelicula)) {
-            funciones.put(pelicula, null);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Agrega la funciona a las funciones de pelicula. Si la pelicula no existe
-     * se agrega junto con la funcion.
-     *
-     * @param pelicula pelicula a la cual se quiere agregar una nueva funcion
-     * @param funcion nueva funcion de pelicula
-     */
-    public void agregarFuncionAPelicula(Pelicula pelicula, Funcion funcion) {
-        List<Funcion> funcionesDePelicula;
-        if ((funcionesDePelicula = funciones.get(pelicula)) == null) {
-            funcionesDePelicula = new ArrayList<Funcion>();
-            funcionesDePelicula.add(funcion);
-            funciones.put(pelicula, funcionesDePelicula);
-        } else {
-            funcionesDePelicula.add(funcion);
-            funciones.put(pelicula, funcionesDePelicula);
-        }
     }
 
     /**
@@ -81,5 +49,34 @@ public class ProgramaDelDia {
             return Collections.emptyList();
         }
     }
+
+    public List<Pelicula> getPeliculas() {
+        return Collections.unmodifiableList(funciones.keySet().stream().collect(Collectors.toList()));
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     *
+     * @return Regresa un mapa inmodificable
+     */
+    public Map<Pelicula, List<Funcion>> getTodasLasFunciones() {
+        return Collections.unmodifiableMap(this.funciones);
+    }
+    
+    public Map<Pelicula, List<Funcion>> getTodasLasFunciones(LocalTime hora) {
+        Map<Pelicula, List<Funcion>> result = new HashMap<>();
+        Set<Pelicula> peliculas = funciones.keySet();
+        for(Pelicula pelicula : peliculas){
+            List<Funcion> funcionesList = funciones.get(pelicula).stream().filter(f -> f.getHora().toLocalTime().isAfter(hora)).collect(Collectors.toList());
+            result.put(pelicula, funcionesList);
+        }
+        
+        
+        return Collections.unmodifiableMap(result);
+    }
+    
 
 }

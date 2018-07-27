@@ -1,0 +1,44 @@
+    {#tabla}
+    <head>
+        <title>Cine Uam Azc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Cine Uam Azc</h1>
+        <form action="/cine/funciones" method="post">
+            <select name="dia">
+                {% loop in $dias as $d %}
+                    <option value="{$d}" {.if ($d == $selected)} selected{/if}>{$d}</option>
+                {% endloop %}
+            </select>
+            <input type="submit" value="enviar">
+        </form>
+        <br>
+        <table border="1" width="1" cellspacing="3" cellpadding="3">
+            <thead>
+                <tr>
+                    <th>Funciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% loop in $funciones as $pel:$fun %}
+                <tr>
+                    <td>{$pel}</td>
+                    {% loop in $fun as $f %}
+                        <td>
+                            <form action="/cine/asientos" method="post">
+                                <input type="hidden" name="id" value="{$f.id}">
+                                <input type="submit" value="{$f.hora_y_minuto}">
+                            </form>
+                        </td>
+                        {% onEmpty %}
+                        <td></td>
+                    {% endloop %}
+                </tr>
+                {% endloop %}
+            </tbody>
+        </table>
+
+    </body>
+    {#}
